@@ -127,6 +127,14 @@ def test_invalid_letter_is_refused(tmp_path):
     assert executor.calls == []
 
 
+def test_catalog_has_every_letter_lab1_can_draw():
+    from src.executor import Lab1LetterCatalog
+
+    catalog = Lab1LetterCatalog()
+    assert all(catalog.supports(chr(c)) for c in range(ord("A"), ord("Z") + 1))
+    assert not Lab1LetterCatalog(font_path=None).supports("C")   # letters.json alone: A, L, N
+
+
 def test_direct_motion_fields_are_refused(tmp_path):
     adapter, executor = make_adapter(tmp_path)
     result = decode(adapter.handle_line(json.dumps(atom_payload(x=10, speed=20))))

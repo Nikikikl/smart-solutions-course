@@ -13,6 +13,9 @@ from .models import AtomLetterJob, AtomPickPlaceJob, STABLE_REASONS
 DEFAULT_LAB1_LETTERS = (
     Path(__file__).resolve().parents[2] / "lab1" / "config" / "letters.json"
 )
+# Lab 1 station draws letters missing from letters.json with this single-stroke
+# font (station.py --letter-font, default "futural"); the catalog mirrors that.
+DEFAULT_LAB1_FONT = DEFAULT_LAB1_LETTERS.parent / "fonts" / "futural.json"
 
 
 @dataclass(frozen=True)
@@ -75,7 +78,11 @@ class Lab1LetterCatalog:
     to import its script-style modules. Motion data never enters this adapter.
     """
 
-    def __init__(self, path: str | Path = DEFAULT_LAB1_LETTERS) -> None:
+    def __init__(
+        self,
+        path: str | Path = DEFAULT_LAB1_LETTERS,
+        font_path: str | Path | None = DEFAULT_LAB1_FONT,
+    ) -> None:
         source = Path(path)
         try:
             document = json.loads(source.read_text(encoding="utf-8"))
@@ -95,6 +102,19 @@ class Lab1LetterCatalog:
             and isinstance(definition, dict)
             and isinstance(definition.get("strokes"), list)
             and bool(definition["strokes"])
+        ) | self._font_letters(font_path)
+
+    @staticmethod
+    def _font_letters(font_path: str | Path | None) -> frozenset[str]:
+        if font_path is None:
+            return frozenset()
+        try:
+            glyphs = json.loads(Path(font_path).read_text(encoding="utf-8")).get("glyphs", {})
+        except (OSError, json.JSONDecodeError, AttributeError) as exc:
+            raise RuntimeError("Lab 1 letter font is unavailable") from exc
+        return frozenset(
+            letter for letter, glyph in glyphs.items()
+            if isinstance(letter, str) and len(letter) == 1 and "A" <= letter <= "Z" and glyph
         )
 
     def supports(self, letter: str) -> bool:
