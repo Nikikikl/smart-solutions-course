@@ -1,0 +1,11 @@
+condition,camera_count,trial,command_timestamp,robot_first_movement_timestamp,latency_ms,method,note
+tool_camera_event,2,1,2026-11-15T14:05:01.210,2026-11-15T14:05:01.344,134,feedback_30004,MovL Z+10.0mm 30% Z 10 mm at 30 % as the camera event
+tool_camera_event,2,2,2026-11-15T14:05:03.120,2026-11-15T14:05:03.263,143,feedback_30004,MovL Z-10.0mm 30% Z 10 mm at 30 % as the camera event
+tool_camera_event,2,3,2026-11-15T14:05:06.136,2026-11-15T14:05:06.270,133,feedback_30004,MovL Z+10.0mm 30% Z 10 mm at 30 % as the camera event
+tool_camera_event,2,4,2026-11-15T14:05:08.047,2026-11-15T14:05:08.188,142,feedback_30004,MovL Z-10.0mm 30% Z 10 mm at 30 % as the camera event
+tool_camera_event,2,5,2026-11-15T14:05:10.863,2026-11-15T14:05:10.997,134,feedback_30004,MovL Z+10.0mm 30% Z 10 mm at 30 % as the camera event
+tool_camera_event,2,6,2026-11-15T14:05:12.707,2026-11-15T14:05:12.852,145,feedback_30004,MovL Z-10.0mm 30% Z 10 mm at 30 % as the camera event
+tool_camera_event,2,7,2026-11-15T14:05:15.165,2026-11-15T14:05:15.298,133,feedback_30004,MovL Z+10.0mm 30% Z 10 mm at 30 % as the camera event
+tool_camera_event,2,8,2026-11-15T14:05:17.100,2026-11-15T14:05:17.242,142,feedback_30004,MovL Z-10.0mm 30% Z 10 mm at 30 % as the camera event
+tool_camera_event,2,9,2026-11-15T14:05:18.909,2026-11-15T14:05:19.050,141,feedback_30004,MovL Z+10.0mm 30% Z 10 mm at 30 % as the camera event
+tool_camera_event,2,10,2026-11-15T14:05:23.254,2026-11-15T14:05:23.395,141,feedback_30004,MovL Z-10.0mm 30% Z 10 mm at 30 % as the camera event

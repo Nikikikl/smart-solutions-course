@@ -1,7 +1,7 @@
 __pycache__/
 .pytest_cache/
 server/post_office.sqlite3*
-data/station_jobs.sqlite3*
+data/*.sqlite3*
 .env
 .env.*
 !.env.example
