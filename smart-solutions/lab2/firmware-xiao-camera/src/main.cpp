@@ -281,6 +281,11 @@ void serviceSerialCommands() {
 }  // namespace
 
 void setup() {
+  // Native USB CDC (HWCDC): the default 256-byte TX ring and 100 ms host wait
+  // drop parts of a 30-40 kB JPEG whenever the PC reads a little late
+  // (arduino-esp32 #10836). Buffer more and wait longer instead of dropping.
+  Serial.setTxBufferSize(16384);
+  Serial.setTxTimeoutMs(2000);
   Serial.begin(115200);
   delay(250);
   Serial.println("Lab 2 tool camera boot");

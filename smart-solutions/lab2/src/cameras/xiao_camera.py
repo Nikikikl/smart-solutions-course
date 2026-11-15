@@ -77,8 +77,8 @@ class XiaoUsbCameraConfig:
     port: str = ""
     baud: int = 115200
     target_fps: float = 5.0
-    read_timeout_s: float = 3.0
-    retry_interval_s: float = 2.0
+    read_timeout_s: float = 0.5  # a 13-40 kB frame arrives in <0.1 s; a lost byte must not stall 3 s
+    retry_interval_s: float = 0.5
     max_frame_bytes: int = 5_000_000
 
 
@@ -109,7 +109,17 @@ class XiaoUsbCamera(CameraSource):
         return port
 
     def capture_frame(self, resource: object) -> tuple[bytes, int, int]:
-        port = resource
+        # A damaged frame is skipped and the next one asked for on the same open
+        # port; only repeated failures reach the worker, which reopens the port.
+        for attempt in range(3):
+            try:
+                return self._one_frame(resource)
+            except RuntimeError:
+                if attempt == 2:
+                    raise
+        raise AssertionError("unreachable")
+
+    def _one_frame(self, port) -> tuple[bytes, int, int]:
         port.reset_input_buffer()
         port.write(b"c")
         while True:
