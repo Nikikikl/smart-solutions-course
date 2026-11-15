@@ -70,3 +70,66 @@ class XiaoCamera(CameraSource):
         values.pop("snapshot_url")
         values["snapshot_url_configured"] = bool(self.config.snapshot_url)
         return {"backend": "xiao-http-snapshot", **values}
+
+
+@dataclass(frozen=True)
+class XiaoUsbCameraConfig:
+    port: str = ""
+    baud: int = 115200
+    target_fps: float = 5.0
+    read_timeout_s: float = 3.0
+    retry_interval_s: float = 2.0
+    max_frame_bytes: int = 5_000_000
+
+
+class XiaoUsbCamera(CameraSource):
+    """XIAO over USB serial: 'c' -> "JPG <len>\n" + JPEG (firmware-xiao-camera serviceSerialCommands).
+
+    For a station PC without Wi-Fi. The port has one owner: the 3D hub tool camera
+    uses the same protocol, so only one of them may run at a time.
+    """
+
+    def __init__(self, config: XiaoUsbCameraConfig, *, serial_module: Any = None) -> None:
+        super().__init__("tool", target_fps=config.target_fps, retry_interval_s=config.retry_interval_s)
+        self.config = config
+        self._serial = serial_module
+
+    def open_source(self) -> object:
+        if not self.config.port:
+            raise RuntimeError("XIAO USB port is not configured")
+        serial = self._serial
+        if serial is None:
+            import serial  # pyserial
+        port = serial.Serial()
+        port.port, port.baudrate, port.timeout = self.config.port, self.config.baud, self.config.read_timeout_s
+        port.dtr = False  # DTR/RTS toggling resets the ESP32-S3
+        port.rts = False
+        port.open()
+        port.reset_input_buffer()
+        return port
+
+    def capture_frame(self, resource: object) -> tuple[bytes, int, int]:
+        port = resource
+        port.reset_input_buffer()
+        port.write(b"c")
+        while True:
+            line = port.readline().decode("ascii", errors="replace").strip()
+            if not line:
+                raise RuntimeError("no answer from XIAO")
+            if line.startswith("ERR"):
+                raise RuntimeError(f"XIAO: {line}")
+            if line.startswith("JPG "):
+                size = int(line.split()[1])
+                break
+        if not 0 < size <= self.config.max_frame_bytes:
+            raise RuntimeError("XIAO JPEG size out of range")
+        data = port.read(size)
+        if len(data) != size or not data.startswith(b"\xff\xd8") or not data.endswith(b"\xff\xd9"):
+            raise RuntimeError("XIAO JPEG incomplete")
+        return data, 0, 0
+
+    def close_source(self, resource: object) -> None:
+        resource.close()
+
+    def configuration(self) -> dict[str, object]:
+        return {"backend": "xiao-usb-serial", **asdict(self.config)}

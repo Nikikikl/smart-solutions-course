@@ -15,6 +15,7 @@ from typing import Any
 from flask import Flask, Response, abort, jsonify, send_from_directory, stream_with_context
 
 from .cameras import CameraSource, MockCamera, UsbCamera, UsbCameraConfig, XiaoCamera, XiaoCameraConfig
+from .cameras.xiao_camera import XiaoUsbCamera, XiaoUsbCameraConfig
 
 CAMERA_NAMES = ("table", "tool")
 STATIC_DIR = Path(__file__).with_name("camera_static")
@@ -126,7 +127,9 @@ def build_sources(args: argparse.Namespace) -> dict[str, CameraSource]:
                 target_fps=args.fps,
             )
         ),
-        "tool": XiaoCamera(
+        "tool": XiaoUsbCamera(XiaoUsbCameraConfig(port=args.xiao_port, target_fps=args.fps))
+        if args.xiao_port
+        else XiaoCamera(
             XiaoCameraConfig(
                 snapshot_url=args.xiao_snapshot_url,
                 expected_width=args.stream_width,
@@ -148,7 +151,9 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--usb-capture-height", type=int, default=2160)
     parser.add_argument("--stream-width", type=int, default=1280)
     parser.add_argument("--stream-height", type=int, default=720)
-    parser.add_argument("--xiao-snapshot-url", default="")
+    xiao = parser.add_mutually_exclusive_group()
+    xiao.add_argument("--xiao-snapshot-url", default="")
+    xiao.add_argument("--xiao-port", default="", help="XIAO over USB serial, e.g. COM5 (no Wi-Fi needed)")
     return parser.parse_args(argv)
 
 
