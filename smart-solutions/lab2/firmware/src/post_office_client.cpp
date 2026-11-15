@@ -400,6 +400,17 @@ void PostOfficeClient::tick(uint32_t nowMs) {
     }
     return;
   }
+  const String active = state_->activeJobId();
+  if (!active.isEmpty()) {
+    const char* giveUp = bridge_->service(nowMs, active);
+    if (giveUp != nullptr) {
+      // Never wait without a deadline: report the failure and become idle.
+      state_->queueRefused(active, giveUp);
+      setStatus(giveUp);
+      logLine(String(giveUp) + " id=" + active);
+      return;
+    }
+  }
   if (!state_->canPoll()) return;
   if (static_cast<int32_t>(nowMs - nextPollAtMs_) < 0) return;
   nextPollAtMs_ = nowMs + settings_.pollIntervalMs;

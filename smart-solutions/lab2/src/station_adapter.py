@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 from contextlib import ExitStack
 from pathlib import Path
 import sys
@@ -58,6 +59,21 @@ class StationAdapter:
         self.local_execution_enabled = local_execution_enabled
         self.use_lab1_letter_identity = use_lab1_letter_identity
         self.live_letter_integration = live_letter_integration
+
+    @staticmethod
+    def ack_line(line: str | bytes) -> str | None:
+        """Delivery receipt for a well-formed job line, sent before execution.
+
+        The Atom resends a job until it sees this receipt (USB CDC on the
+        ESP32-S3 can drop bytes). Repeats are safe: the store deduplicates by
+        job_id, so a resent job never runs twice.
+        """
+        try:
+            payload, _ = parse_json_line(line)
+            job = parse_atom_message(payload)
+        except MessageValidationError:
+            return None
+        return json.dumps({"station_ack": {"id": job.job_id}}, separators=(",", ":"))
 
     def handle_line(self, line: str | bytes) -> str:
         try:

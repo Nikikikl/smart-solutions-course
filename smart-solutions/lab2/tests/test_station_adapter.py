@@ -297,8 +297,34 @@ def test_malformed_serial_line_does_not_stop_processing(tmp_path):
         log=lambda _: None,
     )
     assert decode(emitted[0])["reason"] == "invalid_message"
-    assert decode(emitted[1])["status"] == "done"
+    assert json.loads(emitted[1]) == {"station_ack": {"id": atom_payload()["job_id"]}}
+    assert decode(emitted[2])["status"] == "done"
     assert len(executor.calls) == 1
+
+
+def test_ack_precedes_result_and_resent_job_runs_once(tmp_path):
+    """The Atom resends until it sees station_ack; a resend must not run twice."""
+    adapter, executor = make_adapter(tmp_path)
+    line = (json.dumps(atom_payload()) + "\n").encode()
+    emitted = []
+    process_lines([line, line], adapter, emit=emitted.append, log=lambda _: None)
+    job_id = atom_payload()["job_id"]
+    acks = [json.loads(e) for e in emitted if "station_ack" in e]
+    results = [decode(e) for e in emitted if "station_ack" not in e]
+    assert acks == [{"station_ack": {"id": job_id}}] * 2
+    assert json.loads(emitted[0]) == {"station_ack": {"id": job_id}}
+    assert [r["status"] for r in results] == ["done", "done"]
+    assert len(executor.calls) == 1
+
+
+def test_no_ack_for_corrupted_job_line(tmp_path):
+    """Bytes dropped by USB CDC give invalid JSON or ids: never acknowledged."""
+    adapter, executor = make_adapter(tmp_path)
+    corrupted = '{"letter":"A","session":"post-officeeq":tom_sent_ms":198896,"job_id":"0303ab"}'
+    emitted = []
+    process_lines([corrupted], adapter, emit=emitted.append, log=lambda _: None)
+    assert all("station_ack" not in e for e in emitted)
+    assert executor.calls == []
 
 
 def test_default_mode_does_not_call_executor_or_mg400(tmp_path):

@@ -414,6 +414,8 @@ void setup() {
   auto config = M5.config();
   M5.begin(config);
   M5.Display.setRotation(0);
+  // Default HWCDC TX ring is 256 bytes; logs plus a job line overflow it.
+  Serial.setTxBufferSize(4096);
   Serial.begin(115200);
 
   wifiPreferences.begin("wifi", false);  // compatible with Lab 1 keys

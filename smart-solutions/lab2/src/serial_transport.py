@@ -26,6 +26,10 @@ def process_lines(
         if text.startswith("# "):
             log("[atom-log] " + text[2:])
             continue
+        # Receipt first, so the Atom stops resending while a job executes.
+        ack = adapter.ack_line(text)
+        if ack is not None:
+            emit(ack)
         try:
             result = adapter.handle_line(text)
         except Exception as exc:

@@ -235,7 +235,7 @@ def test_finish_transaction_error_emits_no_done_and_restart_does_not_repeat(stor
                               WHEN NEW.state='done' BEGIN SELECT RAISE(ABORT, 'synthetic fault'); END""")
     emitted = []
     process_lines([message()], adapter, emit=emitted.append, log=lambda value: None)
-    assert emitted == [] and row(store)["state"] == "in_progress"
+    assert emitted == ['{"station_ack":{"id":"job-1"}}'] and row(store)["state"] == "in_progress"
     assert store.interlock_job_id() == "job-1" and http.calls.count("POST") == 1
     second, unused = live_adapter(StationJobStore(store.path))
     assert decode(second.handle_line(message()))["reason"] == "ambiguous_after_restart"

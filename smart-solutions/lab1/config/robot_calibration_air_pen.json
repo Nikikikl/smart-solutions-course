@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "workspace": {
+    "origin_x": null,
+    "origin_y": null,
+    "width": null,
+    "height": null
+  },
+  "pose": {
+    "r": -160.0,
+    "pen_up_z": -60.0,
+    "pen_down_z": -70.0
+  },
+  "motion": {
+    "speed_percent": 10
+  },
+  "paper": {
+    "corner_x": 363.0,
+    "corner_y": -103.0,
+    "edge_x": 363.0,
+    "edge_y": 132.0,
+    "size": "A4",
+    "orientation": "landscape",
+    "margin_mm": 0,
+    "width_mm": 235.0,
+    "height_mm": 148.0
+  },
+  "paper_comment": "03.10.26 ~15:00: robot base moved. Denys taught the top edge of a safe zone inside the A4 sheet (gaps on purpose): top-left (215,-103), top-right (215,132), 235 mm. Height 148 mm assumes the same gap top/bottom as at the sides ((297-235)/2 = 31 mm). Bottom corners = top + 148 mm away from the robot. Whole zone checked reachable with mg400-base /api/check at Z -112 and -100.",
+  "paper_previous_03_10_26_morning": {
+    "corner_x": 335.0,
+    "corner_y": -118.0,
+    "edge_x": 335.0,
+    "edge_y": 146.0,
+    "size": "A4",
+    "orientation": "landscape",
+    "margin_mm": 10,
+    "width_mm": 264.0,
+    "height_mm": 210.0
+  },
+  "air_test_comment": "15.11.26 air run WITH pen mounted: +20 mm over the 14.11 no-pen air run (pen tip length not yet taught). R -160 = current J4, avoids a 190 deg J4 turn with the XIAO cable. Letter A area X 218-238 Y -101..-85; mg400-base /api/check reachable at -60/-70."
+}
