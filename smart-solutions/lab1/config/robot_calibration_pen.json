@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "workspace": {
+    "origin_x": null,
+    "origin_y": null,
+    "width": null,
+    "height": null
+  },
+  "pose": {
+    "r": -160.0,
+    "pen_down_z": -111.85,
+    "pen_up_z": -101.85
+  },
+  "motion": {
+    "speed_percent": 10
+  },
+  "paper": {
+    "corner_x": 379.45,
+    "corner_y": -100.4,
+    "edge_x": 365.39,
+    "edge_y": 138.57,
+    "width_mm": 239.4,
+    "height_mm": 150.7,
+    "size": "A4",
+    "orientation": "landscape",
+    "margin_mm": 10.0
+  },
+  "paper_comment": "Taught in the MG400 Station Hub (Jog tab, Work zone) 15.11.26 12:56: four sheet corners, rectangle fitted; pen height taught on the paper."
+}
