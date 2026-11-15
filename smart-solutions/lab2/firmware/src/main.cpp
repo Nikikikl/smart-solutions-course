@@ -232,7 +232,15 @@ void handlePostOfficeTest() {
   } else {
     document["http_status"] = nullptr;
   }
-  // Show what the server answered: printable characters only, bounded length.
+  // Show what the server answered, but only when it is the post-office health
+  // answer ({"ok":..,"service":"lab2-post-office"}); the page has no login, so
+  // a body from any other configured host is never echoed (no SSRF readout).
+  JsonDocument health;
+  const bool knownHealth = ok &&
+      deserializeJson(health, serverResponse) == DeserializationError::Ok &&
+      health["service"].is<const char*>() &&
+      String(health["service"].as<const char*>()) == "lab2-post-office";
+  if (!knownHealth) serverResponse = "";
   String excerpt;
   for (size_t index = 0; index < serverResponse.length() &&
                          excerpt.length() < kServerResponseExcerptLength;
