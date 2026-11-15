@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 822" role="img" aria-labelledby="title description">
+  <title id="title">Smart Solutions · Lab 4 süsteemiskeem</title>
+  <desc id="description">Olemasolev HTTPS-postkontor ühendab Atomi ja kohaliku jaama. Lab 4 kavand lisab ühise robotilüüsi, WireGuardi kaudu MQTT salvestuse ning MCP lugemise.</desc>
+  <rect x="0" y="0" width="1280" height="822" rx="0" fill="#ffffff" stroke="none" />
+  <rect x="24" y="68" width="1232" height="215" rx="14" fill="#f6f8fc" stroke="#d2dde8" />
+  <rect x="24" y="301" width="1232" height="497" rx="14" fill="#f5fbf8" stroke="#d2dde8" />
+  <polyline points="194,145 231,145" fill="none" stroke="#245287" stroke-width="1.5" />
+  <polygon points="230,145 222,148.5 222,141.5" fill="#245287" />
+  <polyline points="460,145 419,145" fill="none" stroke="#245287" stroke-width="1.5" />
+  <polygon points="420,145 428,141.5 428,148.5" fill="#245287" />
+  <polyline points="610,145 648,145" fill="none" stroke="#245287" stroke-width="1.5" />
+  <polygon points="647,145 639,148.5 639,141.5" fill="#245287" />
+  <polyline points="816,145 851,145" fill="none" stroke="#245287" stroke-width="1.5" />
+  <polygon points="850,145 842,148.5 842,141.5" fill="#245287" />
+  <polyline points="1011,145 1047,145" fill="none" stroke="#245287" stroke-width="1.5" />
+  <polygon points="1046,145 1038,148.5 1038,141.5" fill="#245287" />
+  <polyline points="706,220 717,220 717,205 1031,205 1031,224 1047,224" fill="none" stroke="#245287" stroke-width="1.5" />
+  <polygon points="1046,224 1038,227.5 1038,220.5" fill="#245287" />
+  <polyline points="908,244 1047,244" fill="none" stroke="#245287" stroke-width="1.5" />
+  <polygon points="1046,244 1038,247.5 1038,240.5" fill="#245287" />
+  <polyline points="257,417 291,417" fill="none" stroke="#176756" stroke-width="1.5" />
+  <polygon points="290,417 282,420.5 282,413.5" fill="#176756" />
+  <polyline points="511,417 551,417" fill="none" stroke="#176756" stroke-width="1.5" />
+  <polygon points="550,417 542,420.5 542,413.5" fill="#176756" />
+  <polyline points="787,417 829,417" fill="none" stroke="#176756" stroke-width="1.5" />
+  <polygon points="828,417 820,420.5 820,413.5" fill="#176756" />
+  <polyline points="257,511 291,511" fill="none" stroke="#176756" stroke-width="1.5" />
+  <polygon points="290,511 282,514.5 282,507.5" fill="#176756" />
+  <polyline points="511,511 551,511" fill="none" stroke="#176756" stroke-width="1.5" />
+  <polygon points="550,511 542,514.5 542,507.5" fill="#176756" />
+  <polyline points="787,511 829,511" fill="none" stroke="#176756" stroke-width="1.5" />
+  <polygon points="828,511 820,514.5 820,507.5" fill="#176756" />
+  <polyline points="990,511 1026,511" fill="none" stroke="#176756" stroke-width="1.5" />
+  <polygon points="1025,511 1017,514.5 1017,507.5" fill="#176756" />
+  <polyline points="511,606 569,606 569,542" fill="none" stroke="#176756" stroke-width="1.5" />
+  <polygon points="569,543 572.5,551 565.5,551" fill="#176756" />
+  <polyline points="771,542 771,606 829,606" fill="none" stroke="#176756" stroke-width="1.5" />
+  <polygon points="828,606 820,609.5 820,602.5" fill="#176756" />
+  <polyline points="990,606 1129,606 1129,542" fill="none" stroke="#176756" stroke-width="1.5" />
+  <polygon points="1129,543 1132.5,551 1125.5,551" fill="#176756" />
+  <polyline points="257,713 291,713" fill="none" stroke="#176756" stroke-width="1.5" />
+  <polygon points="290,713 282,716.5 282,709.5" fill="#176756" />
+  <polyline points="511,713 551,713" fill="none" stroke="#176756" stroke-width="1.5" />
+  <polygon points="550,713 542,716.5 542,709.5" fill="#176756" />
+  <polyline points="787,713 829,713" fill="none" stroke="#176756" stroke-width="1.5" stroke-dasharray="4 4" />
+  <polygon points="828,713 820,716.5 820,709.5" fill="#176756" />
+  <rect x="47" y="116" width="147" height="59" rx="9" fill="#eef5ff" stroke="#245287" />
+  <text x="120.5" y="142.5" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Brauser</text>
+  <text x="120.5" y="161.5" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">avalik veeb</text>
+  <rect x="231" y="116" width="188" height="59" rx="9" fill="#eef5ff" stroke="#245287" />
+  <text x="325.0" y="142.5" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">HTTPS-postkontor</text>
+  <text x="325.0" y="161.5" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">dropleti avalik teenus</text>
+  <rect x="460" y="116" width="150" height="59" rx="9" fill="#eef5ff" stroke="#245287" />
+  <text x="535.0" y="142.5" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">AtomS3R</text>
+  <text x="535.0" y="161.5" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">polling ja LCD</text>
+  <rect x="648" y="116" width="168" height="59" rx="9" fill="#eef5ff" stroke="#245287" />
+  <text x="732.0" y="142.5" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Station Adapter</text>
+  <text x="732.0" y="161.5" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">USB sisend</text>
+  <rect x="851" y="116" width="160" height="59" rx="9" fill="#eef5ff" stroke="#245287" />
+  <text x="931.0" y="142.5" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Lab 1 jaam</text>
+  <text x="931.0" y="161.5" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">tähe liikumisplaan</text>
+  <rect x="1047" y="116" width="185" height="59" rx="9" fill="#eef5ff" stroke="#245287" />
+  <text x="1139.5" y="142.5" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">MG400</text>
+  <text x="1139.5" y="161.5" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">kohalik Ethernet</text>
+  <rect x="551" y="211" width="155" height="52" rx="9" fill="#eef5ff" stroke="#245287" />
+  <text x="628.5" y="234.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Lauakaamera</text>
+  <text x="628.5" y="253.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">Verbatim · USB</text>
+  <rect x="735" y="211" width="173" height="52" rx="9" fill="#eef5ff" stroke="#245287" />
+  <text x="821.5" y="234.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Tööriistakaamera</text>
+  <text x="821.5" y="253.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">XIAO · USB-jada</text>
+  <rect x="1047" y="211" width="185" height="52" rx="9" fill="#eef5ff" stroke="#245287" />
+  <text x="1139.5" y="234.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Kaameraserver</text>
+  <text x="1139.5" y="253.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">jaama kohalik vaade</text>
+  <rect x="47" y="386" width="210" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="152.0" y="414.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Töövoo salvestaja</text>
+  <text x="152.0" y="433.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">Jog / Picker ja poosid</text>
+  <rect x="291" y="386" width="220" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="401.0" y="414.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Operator Lock</text>
+  <text x="401.0" y="433.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">serveripoolne käsuõigus</text>
+  <rect x="551" y="386" width="236" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="669.0" y="414.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Üks MG400 lüüs</text>
+  <text x="669.0" y="433.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">ainus ühendus robotiga</text>
+  <rect x="829" y="386" width="133" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="895.5" y="414.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">MG400</text>
+  <text x="895.5" y="433.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">kohalik robot</text>
+  <rect x="47" y="480" width="210" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="152.0" y="508.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">AtomS3R-i välkmälu</text>
+  <text x="152.0" y="527.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">USB lõpusündmus</text>
+  <rect x="291" y="480" width="220" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="401.0" y="508.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Jaama püsipuhver</text>
+  <text x="401.0" y="527.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">tsüklikirje + failiviited</text>
+  <rect x="551" y="480" width="236" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="669.0" y="508.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Privaatne WireGuard</text>
+  <text x="669.0" y="527.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">MQTT QoS 1 ja failitee</text>
+  <rect x="829" y="480" width="161" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="909.5" y="508.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Mosquitto</text>
+  <text x="909.5" y="527.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">meeskonna ACL</text>
+  <rect x="1026" y="480" width="206" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="1129.0" y="508.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Kirjutaja ja SQLite</text>
+  <text x="1129.0" y="527.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">üks rida tsükli kohta</text>
+  <rect x="291" y="575" width="220" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="401.0" y="603.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Algfoto ja rõhukõver</text>
+  <text x="401.0" y="622.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">suhtelised failiviited</text>
+  <rect x="829" y="575" width="161" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="909.5" y="603.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Failiteenus</text>
+  <text x="909.5" y="622.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">püsiv fail ja räsi</text>
+  <rect x="47" y="682" width="210" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="152.0" y="710.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">MCP klient VPN-is</text>
+  <text x="152.0" y="729.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">ajutine salajane link</text>
+  <rect x="291" y="682" width="220" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="401.0" y="710.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Jaama MCP</text>
+  <text x="401.0" y="729.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">neli lugemistööriista</text>
+  <rect x="551" y="682" width="236" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="669.0" y="710.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Jaama lugemisvaated</text>
+  <text x="669.0" y="729.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">olek, kirjed ja kaadrid</text>
+  <rect x="829" y="682" width="403" height="62" rx="9" fill="#edf8f4" stroke="#176756" />
+  <text x="1030.5" y="710.0" font-family="Arial, sans-serif" font-size="15" fill="#172c40" text-anchor="middle" font-weight="700">Privaatne andmebaasi lugemisteenus</text>
+  <text x="1030.5" y="729.0" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="middle">volitatud lugemine VPN-is</text>
+  <text x="36" y="35" font-family="Arial, sans-serif" font-size="25" fill="#16324f" text-anchor="start" font-weight="700">Smart Solutions · Lab 4 süsteemiskeem</text>
+  <text x="47" y="97" font-family="Arial, sans-serif" font-size="15" fill="#245287" text-anchor="start" font-weight="700">OLEMASOLEV · LAB 1–2</text>
+  <text x="47" y="329" font-family="Arial, sans-serif" font-size="15" fill="#176756" text-anchor="start" font-weight="700">KAVAND · LAB 3 WIREGUARD JA LAB 4 TEENUSED</text>
+  <text x="47" y="365" font-family="Arial, sans-serif" font-size="14" fill="#176756" text-anchor="start" font-weight="700">Labori jaam ja roboti kohalik võrk</text>
+  <text x="829" y="466" font-family="Arial, sans-serif" font-size="14" fill="#176756" text-anchor="start" font-weight="700">Droplet · privaatne teenusepind</text>
+  <text x="235" y="193" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="start">Atom küsib töid HTTPS-i kaudu</text>
+  <text x="591" y="193" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="start">USB → jaam → Ethernet</text>
+  <text x="829" y="649" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="start">Pärast failikontrolli ja commit’i → rakenduskinnitus jaamale</text>
+  <text x="47" y="770" font-family="Arial, sans-serif" font-size="12" fill="#52677d" text-anchor="start">MCP annab VPN-i kliendile ajutise lugemisõiguse. Avalik postkontor on privaatsest teenusepinnast eraldi.</text>
+</svg>

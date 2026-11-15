@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram id="lab4-system" name="Lab 4 süsteemiskeem">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1280" pageHeight="822" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="existing" value="" style="rounded=1;arcSize=5;fillColor=#f6f8fc;strokeColor=#d2dde8;" vertex="1" parent="1">
+          <mxGeometry x="24" y="68" width="1232" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="planned" value="" style="rounded=1;arcSize=5;fillColor=#f5fbf8;strokeColor=#d2dde8;" vertex="1" parent="1">
+          <mxGeometry x="24" y="301" width="1232" height="497" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#245287;exitX=1.000;exitY=0.492;entryX=0.000;entryY=0.492;" edge="1" parent="1" source="browser" target="public">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#245287;exitX=0.000;exitY=0.492;entryX=1.000;entryY=0.492;" edge="1" parent="1" source="atom" target="public">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#245287;exitX=1.000;exitY=0.492;entryX=0.000;entryY=0.492;" edge="1" parent="1" source="atom" target="adapter">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-3" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#245287;exitX=1.000;exitY=0.492;entryX=0.000;entryY=0.492;" edge="1" parent="1" source="adapter" target="station">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-4" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#245287;exitX=1.000;exitY=0.492;entryX=0.000;entryY=0.492;" edge="1" parent="1" source="station" target="robot">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-5" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#245287;exitX=1.000;exitY=0.173;entryX=0.000;entryY=0.250;" edge="1" parent="1" source="table" target="camera">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="717" y="220" />
+              <mxPoint x="717" y="205" />
+              <mxPoint x="1031" y="205" />
+              <mxPoint x="1031" y="224" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-6" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#245287;exitX=1.000;exitY=0.635;entryX=0.000;entryY=0.635;" edge="1" parent="1" source="tool" target="camera">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-7" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#176756;exitX=1.000;exitY=0.500;entryX=0.000;entryY=0.500;" edge="1" parent="1" source="recorder" target="lock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-8" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#176756;exitX=1.000;exitY=0.500;entryX=0.000;entryY=0.500;" edge="1" parent="1" source="lock" target="gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-9" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#176756;exitX=1.000;exitY=0.500;entryX=0.000;entryY=0.500;" edge="1" parent="1" source="gateway" target="cell">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-10" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#176756;exitX=1.000;exitY=0.500;entryX=0.000;entryY=0.500;" edge="1" parent="1" source="flash" target="outbox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-11" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#176756;exitX=1.000;exitY=0.500;entryX=0.000;entryY=0.500;" edge="1" parent="1" source="outbox" target="vpn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-12" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#176756;exitX=1.000;exitY=0.500;entryX=0.000;entryY=0.500;" edge="1" parent="1" source="vpn" target="mqtt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-13" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#176756;exitX=1.000;exitY=0.500;entryX=0.000;entryY=0.500;" edge="1" parent="1" source="mqtt" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-14" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#176756;exitX=1.000;exitY=0.500;entryX=0.076;entryY=1.000;" edge="1" parent="1" source="files" target="vpn">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="569" y="606" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-15" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#176756;exitX=0.932;exitY=1.000;entryX=0.000;entryY=0.500;" edge="1" parent="1" source="vpn" target="fileserver">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="771" y="606" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-16" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#176756;exitX=1.000;exitY=0.500;entryX=0.500;entryY=1.000;" edge="1" parent="1" source="fileserver" target="db">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1129" y="606" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-17" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#176756;exitX=1.000;exitY=0.500;entryX=0.000;entryY=0.500;" edge="1" parent="1" source="observer" target="mcp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-18" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#176756;exitX=1.000;exitY=0.500;entryX=0.000;entryY=0.500;" edge="1" parent="1" source="mcp" target="views">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-19" style="edgeStyle=segmentEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#176756;exitX=1.000;exitY=0.500;entryX=0.000;entryY=0.500;dashed=1;" edge="1" parent="1" source="views" target="read">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="browser" value="&lt;b&gt;Brauser&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;avalik veeb&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#eef5ff;strokeColor=#245287;" vertex="1" parent="1">
+          <mxGeometry x="47" y="116" width="147" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="public" value="&lt;b&gt;HTTPS-postkontor&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;dropleti avalik teenus&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#eef5ff;strokeColor=#245287;" vertex="1" parent="1">
+          <mxGeometry x="231" y="116" width="188" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="atom" value="&lt;b&gt;AtomS3R&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;polling ja LCD&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#eef5ff;strokeColor=#245287;" vertex="1" parent="1">
+          <mxGeometry x="460" y="116" width="150" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="adapter" value="&lt;b&gt;Station Adapter&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;USB sisend&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#eef5ff;strokeColor=#245287;" vertex="1" parent="1">
+          <mxGeometry x="648" y="116" width="168" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="station" value="&lt;b&gt;Lab 1 jaam&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;tähe liikumisplaan&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#eef5ff;strokeColor=#245287;" vertex="1" parent="1">
+          <mxGeometry x="851" y="116" width="160" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="robot" value="&lt;b&gt;MG400&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;kohalik Ethernet&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#eef5ff;strokeColor=#245287;" vertex="1" parent="1">
+          <mxGeometry x="1047" y="116" width="185" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="table" value="&lt;b&gt;Lauakaamera&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;Verbatim · USB&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#eef5ff;strokeColor=#245287;" vertex="1" parent="1">
+          <mxGeometry x="551" y="211" width="155" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="tool" value="&lt;b&gt;Tööriistakaamera&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;XIAO · USB-jada&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#eef5ff;strokeColor=#245287;" vertex="1" parent="1">
+          <mxGeometry x="735" y="211" width="173" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="camera" value="&lt;b&gt;Kaameraserver&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;jaama kohalik vaade&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#eef5ff;strokeColor=#245287;" vertex="1" parent="1">
+          <mxGeometry x="1047" y="211" width="185" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="recorder" value="&lt;b&gt;Töövoo salvestaja&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;Jog / Picker ja poosid&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="47" y="386" width="210" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="lock" value="&lt;b&gt;Operator Lock&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;serveripoolne käsuõigus&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="291" y="386" width="220" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="gateway" value="&lt;b&gt;Üks MG400 lüüs&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;ainus ühendus robotiga&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="551" y="386" width="236" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cell" value="&lt;b&gt;MG400&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;kohalik robot&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="829" y="386" width="133" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="flash" value="&lt;b&gt;AtomS3R-i välkmälu&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;USB lõpusündmus&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="47" y="480" width="210" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="outbox" value="&lt;b&gt;Jaama püsipuhver&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;tsüklikirje + failiviited&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="291" y="480" width="220" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="vpn" value="&lt;b&gt;Privaatne WireGuard&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;MQTT QoS 1 ja failitee&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="551" y="480" width="236" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="mqtt" value="&lt;b&gt;Mosquitto&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;meeskonna ACL&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="829" y="480" width="161" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="db" value="&lt;b&gt;Kirjutaja ja SQLite&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;üks rida tsükli kohta&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="1026" y="480" width="206" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="files" value="&lt;b&gt;Algfoto ja rõhukõver&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;suhtelised failiviited&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="291" y="575" width="220" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="fileserver" value="&lt;b&gt;Failiteenus&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;püsiv fail ja räsi&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="829" y="575" width="161" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="observer" value="&lt;b&gt;MCP klient VPN-is&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;ajutine salajane link&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="47" y="682" width="210" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="mcp" value="&lt;b&gt;Jaama MCP&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;neli lugemistööriista&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="291" y="682" width="220" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="views" value="&lt;b&gt;Jaama lugemisvaated&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;olek, kirjed ja kaadrid&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="551" y="682" width="236" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="read" value="&lt;b&gt;Privaatne andmebaasi lugemisteenus&lt;/b&gt;&lt;br&gt;&lt;font color='#52677d' size='2'&gt;volitatud lugemine VPN-is&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=15;fontSize=15;fontColor=#172c40;fillColor=#edf8f4;strokeColor=#176756;" vertex="1" parent="1">
+          <mxGeometry x="829" y="682" width="403" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="label-0" value="Smart Solutions · Lab 4 süsteemiskeem" style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontSize=25;fontColor=#16324f;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="36" y="10" width="925" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="label-1" value="OLEMASOLEV · LAB 1–2" style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontSize=15;fontColor=#245287;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="47" y="82" width="300" height="19" as="geometry" />
+        </mxCell>
+        <mxCell id="label-2" value="KAVAND · LAB 3 WIREGUARD JA LAB 4 TEENUSED" style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontSize=15;fontColor=#176756;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="47" y="314" width="630" height="19" as="geometry" />
+        </mxCell>
+        <mxCell id="label-3" value="Labori jaam ja roboti kohalik võrk" style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontSize=14;fontColor=#176756;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="47" y="351" width="476" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="label-4" value="Droplet · privaatne teenusepind" style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontSize=14;fontColor=#176756;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="829" y="452" width="427" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="label-5" value="Atom küsib töid HTTPS-i kaudu" style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontSize=12;fontColor=#52677d;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="235" y="181" width="348" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="label-6" value="USB → jaam → Ethernet" style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontSize=12;fontColor=#52677d;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="591" y="181" width="252" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="label-7" value="Pärast failikontrolli ja commit’i → rakenduskinnitus jaamale" style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontSize=12;fontColor=#52677d;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="829" y="637" width="427" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="label-8" value="MCP annab VPN-i kliendile ajutise lugemisõiguse. Avalik postkontor on privaatsest teenusepinnast eraldi." style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontSize=12;fontColor=#52677d;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="47" y="758" width="1209" height="16" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

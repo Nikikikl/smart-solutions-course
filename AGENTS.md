@@ -83,6 +83,15 @@ Each later lab under `smart-solutions/labN/` follows the same pattern.
   examples, CAD, and simulations do not prove physical completion.
 - Git tag per lab only at final submission, e.g. `smart-solutions-lab1`.
 
+## Lab 4 · ühine kirje ja töövoog
+
+- Loe [Lab 4 README-d](smart-solutions/lab4/README.md), [kirje ettepanekut](smart-solutions/lab4/docs/record.md) ja [integratsiooni lähtedokumente](smart-solutions/lab4/docs/integration.md). Andmehõive 27 välja ja võti `(team, station_id, cycle)` on **PROPOSED**, kuni kõik osapooled kinnitavad. Säilita jaamas püsiv numeratsioon, katkestatud tsükli jälg, algfailid ja muutumatu kordussaatmise sisu.
+- Hoia avalik HTTPS-postkontor eraldi privaatsest WireGuardist, MQTT-st, katsebaasist ja kaameratest. Jaam eemaldab ootel kirje pärast andmebaasi rakenduskinnitust. Puuduv mõõtmine jääb tühjaks. Säilita algne katsekirje ka konflikti või paranduse korral.
+- Luba MCP kaudu ainult `guide`, `status`, `look` ja `api` lugemine. Seadmekäsud ja kirjutusrajad on keelatud. Ligipääs on vaikimisi kinni ja ajutine salajane link jääb VPN-i.
+- Rakenda operaatorilukk jaamas kõigil käsuradadel ja ühes MG400 lüüsis. CAD Hubi Motion Lock katab Hubi enda liikumisteed. Lab 2 software-only mudel on prototüüp. Lease'i kadu nõuab ohutut kohalikku taastamist enne uut liikumist.
+- Kasuta CAD-i vahetuslogi ja kinnitatud konfiguratsiooniviiteid. V3 klaasihoidik on esialgne kandidaat. Seo vahetus tsükli võtme ja ajaga, säilita kontrolli- ning katkestusjälg.
+- Kõik Lab 3 ohutusreeglid kehtivad edasi. Kohalik UV-luba, füüsiline hädastopp ja kontrollitud katkestuskäitumine jäävad nõutuks. Plaan, simulatsioon ja tarkvaratest ei tõenda füüsilist katset.
+
 ## Tools in play
 
 - Laptop with Ethernet port/adapter; Python 3.11+, venv, pip, Flask.
