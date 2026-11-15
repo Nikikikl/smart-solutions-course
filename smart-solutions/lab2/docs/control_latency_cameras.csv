@@ -19,3 +19,13 @@ usb_only,1,7,2026-11-14T17:02:12.823,2026-11-14T17:02:13.094,271,feedback_30004,
 usb_only,1,8,2026-11-14T17:02:17.295,2026-11-14T17:02:17.554,258,feedback_30004,MovL Z-3.0mm 2% USB_on_1280x720_10fps_1client
 usb_only,1,9,2026-11-14T17:02:21.762,2026-11-14T17:02:22.033,271,feedback_30004,MovL Z+3.0mm 2% USB_on_1280x720_10fps_1client
 usb_only,1,10,2026-11-14T17:02:26.245,2026-11-14T17:02:26.503,258,feedback_30004,MovL Z-3.0mm 2% USB_on_1280x720_10fps_1client
+both_cameras,2,1,2026-11-15T14:03:53.256,2026-11-15T14:03:53.496,240,feedback_30004,MovL Z+3.0mm 2% Verbatim 1280x720 + XIAO USB both streaming
+both_cameras,2,2,2026-11-15T14:03:56.385,2026-11-15T14:03:56.638,253,feedback_30004,MovL Z-3.0mm 2% Verbatim 1280x720 + XIAO USB both streaming
+both_cameras,2,3,2026-11-15T14:04:00.848,2026-11-15T14:04:01.103,255,feedback_30004,MovL Z+3.0mm 2% Verbatim 1280x720 + XIAO USB both streaming
+both_cameras,2,4,2026-11-15T14:04:05.308,2026-11-15T14:04:05.562,255,feedback_30004,MovL Z-3.0mm 2% Verbatim 1280x720 + XIAO USB both streaming
+both_cameras,2,5,2026-11-15T14:04:09.775,2026-11-15T14:04:10.012,238,feedback_30004,MovL Z+3.0mm 2% Verbatim 1280x720 + XIAO USB both streaming
+both_cameras,2,6,2026-11-15T14:04:12.869,2026-11-15T14:04:13.107,238,feedback_30004,MovL Z-3.0mm 2% Verbatim 1280x720 + XIAO USB both streaming
+both_cameras,2,7,2026-11-15T14:04:17.980,2026-11-15T14:04:18.225,245,feedback_30004,MovL Z+3.0mm 2% Verbatim 1280x720 + XIAO USB both streaming
+both_cameras,2,8,2026-11-15T14:04:22.432,2026-11-15T14:04:22.682,250,feedback_30004,MovL Z-3.0mm 2% Verbatim 1280x720 + XIAO USB both streaming
+both_cameras,2,9,2026-11-15T14:04:29.887,2026-11-15T14:04:30.126,240,feedback_30004,MovL Z+3.0mm 2% Verbatim 1280x720 + XIAO USB both streaming
+both_cameras,2,10,2026-11-15T14:04:35.346,2026-11-15T14:04:35.604,257,feedback_30004,MovL Z-3.0mm 2% Verbatim 1280x720 + XIAO USB both streaming

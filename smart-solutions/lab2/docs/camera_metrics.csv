@@ -35,3 +35,13 @@ measured_at,camera,source,trial,capture_resolution,display_resolution,client_cou
 2026-11-14T17:15:15.865,table,opencv-usb,10,1280x720,1280x720,1,10.0,285,9.95,8.75,monitor_flip_to_stream_client,default OpenCV backend; station monitor in view
 2026-11-14T17:15:17.384,table,opencv-usb,11,1280x720,1280x720,1,10.0,371,9.95,8.75,monitor_flip_to_stream_client,default OpenCV backend; station monitor in view
 2026-11-14T17:15:18.895,table,opencv-usb,12,1280x720,1280x720,1,10.0,369,9.95,8.75,monitor_flip_to_stream_client,default OpenCV backend; station monitor in view
+2026-11-15T14:05:01.344,tool,xiao-usb-serial,1,800x600,800x600,1,10.0,254,7.93,0.8,robot_move_to_stream_client,"MG400 Z 10 mm at 30 % as event; XIAO on the tool, USB COM5"
+2026-11-15T14:05:03.263,tool,xiao-usb-serial,2,800x600,800x600,1,10.0,1667,7.93,0.8,robot_move_to_stream_client,"MG400 Z 10 mm at 30 % as event; XIAO on the tool, USB COM5"
+2026-11-15T14:05:06.270,tool,xiao-usb-serial,3,800x600,800x600,1,10.0,359,7.93,0.8,robot_move_to_stream_client,"MG400 Z 10 mm at 30 % as event; XIAO on the tool, USB COM5"
+2026-11-15T14:05:08.188,tool,xiao-usb-serial,4,800x600,800x600,1,10.0,354,7.93,0.8,robot_move_to_stream_client,"MG400 Z 10 mm at 30 % as event; XIAO on the tool, USB COM5"
+2026-11-15T14:05:10.997,tool,xiao-usb-serial,5,800x600,800x600,1,10.0,460,7.93,0.8,robot_move_to_stream_client,"MG400 Z 10 mm at 30 % as event; XIAO on the tool, USB COM5"
+2026-11-15T14:05:12.852,tool,xiao-usb-serial,6,800x600,800x600,1,10.0,1108,7.93,0.8,robot_move_to_stream_client,"MG400 Z 10 mm at 30 % as event; XIAO on the tool, USB COM5"
+2026-11-15T14:05:15.298,tool,xiao-usb-serial,7,800x600,800x600,1,10.0,378,7.93,0.8,robot_move_to_stream_client,"MG400 Z 10 mm at 30 % as event; XIAO on the tool, USB COM5"
+2026-11-15T14:05:17.242,tool,xiao-usb-serial,8,800x600,800x600,1,10.0,341,7.93,0.8,robot_move_to_stream_client,"MG400 Z 10 mm at 30 % as event; XIAO on the tool, USB COM5"
+2026-11-15T14:05:19.050,tool,xiao-usb-serial,9,800x600,800x600,1,10.0,,7.93,0.8,robot_move_to_stream_client,"MG400 Z 10 mm at 30 % as event; XIAO on the tool, USB COM5; no frame change detected"
+2026-11-15T14:05:23.395,tool,xiao-usb-serial,10,800x600,800x600,1,10.0,,7.93,0.8,robot_move_to_stream_client,"MG400 Z 10 mm at 30 % as event; XIAO on the tool, USB COM5; no frame change detected"
