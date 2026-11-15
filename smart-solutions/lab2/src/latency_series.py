@@ -69,6 +69,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--interval-ms", type=int, required=True, help="Atom polling interval set on its page")
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--trials", type=int, default=30)
+    parser.add_argument("--first-trial", type=int, default=1, help="continue a series after a stop")
     parser.add_argument("--letters", default="LAB")
     parser.add_argument("--motion-csv", type=Path, default=LAB2 / "data" / "motion_events.csv")
     parser.add_argument("--job-timeout-s", type=float, default=120.0)
@@ -82,7 +83,7 @@ def main(argv: list[str] | None = None) -> int:
         if new_file:
             writer.writerow(["trial", "polling_interval_ms", "job_id", "user_button_timestamp",
                              "robot_first_movement_timestamp", "latency_ms", "result", "note"])
-        for trial in range(1, args.trials + 1):
+        for trial in range(args.first_trial, args.first_trial + args.trials):
             letter = args.letters[(trial - 1) % len(args.letters)]
             clicked = time.time()
             job = office.call("/api/jobs", {"job": "letter", "arg": {"letter": letter}, "ttl_seconds": 60})

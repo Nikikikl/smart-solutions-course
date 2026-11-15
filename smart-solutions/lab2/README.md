@@ -46,10 +46,11 @@ lõpuni.
   vastus jõudis serverisse pärast Wi-Fi taastumist.
 - **Kaamerad.** Mõlemad pildid on jaama kohalikul kaameralehel; lauakaamera
   näeb kogu lauda ja robotit, tööriistakaamera pliiatsi otsa ja tähti.
-- **Lahti.** Latentsus 2 × 30 sõnumit (käib), mõlema kaamera mõõdikud koos
-  XIAO-ga ja juhtimislatentsus kahe kaameraga, rõhuanduri seaded ja test
-  Atomi lehel, telefoni ekraanipilt WiFi väljas, teiste liikmete
-  ohutuskinnitused, tag `smart-solutions-lab2`.
+- **Latentsus.** 30 + 30 sõnumit: 1 s küsimisvahega keskm. 4,6 s, 10 s
+  vahega 6,7 s; valitud 1 s. Juhtimislatentsus kahe kaameraga 247 ms.
+- **Droplet** ehitati märkmete järgi uuesti 1 min 33 s-ga, märkmeid täiendati.
+- **Lahti.** Teiste liikmete ohutuskinnitused (`docs/safety.md`); rõhu
+  näit anduriga ühendatud Lab 2 Atomil.
 
 ## Süsteemi arhitektuur
 
@@ -138,9 +139,27 @@ mobiilse andmesidega ([video](docs/evidence/connection-loss-letter-c-2026-11-15.
 
 | Küsimisvahe | Keskmine | Maksimum | Postil käike tunnis | Fail |
 | :--- | :--- | :--- | :--- | :--- |
-| 1 s | TODO (mõõtmine käib) | TODO | 3600 | [latency_poll_fast.csv](docs/latency_poll_fast.csv) |
-| aeglane | TODO | TODO | TODO | [latency_poll_slow.csv](docs/latency_poll_slow.csv) |
+| 1 s | 4,6 s (mediaan 3,1 s) | 23,0 s | 3600 | [latency_poll_fast.csv](docs/latency_poll_fast.csv) |
+| 10 s | 6,7 s (mediaan 3,1 s) | 22,8 s | 360 | [latency_poll_slow.csv](docs/latency_poll_slow.csv) |
 | Labor 1, täht otse Atomi nupult | Atom → jaam 4,4 ms, jaam → esimene robotikäsk 494 ms (5 vajutust) | 12,2 ms / 592 ms | — | [Lab 1](../lab1/README.md) |
+
+Mõõdetud 15.11.26, 30 + 30 tähte (L, A, B) õhus. Vajutuse aeg on hetk, mil töö
+saadetakse avalikku postkontorisse (sama päring, mida teeb kasutaja leht);
+liikumise aeg on esimene MG400 tagasisidepakett (port 30004), mille liigeste
+nurgad muutuvad (`src/motion_watch.py`). Mõlemad ajad on jaama arvuti kellast.
+Skript: `src/latency_series.py`.
+
+- Suurem osa ajast on Atomi küsimisvahe ja HTTPS-polli aeg; jaama ja roboti
+  osa on alla 0,5 s (Labor 1 number).
+- Maksimumid (~23 s) tulevad üksikutest kadunud polli vastustest (telefoni
+  hotspot): siis antakse töö uuesti välja pärast `CLAIM_LEASE_SECONDS` ja
+  järgmist polli.
+- **Valik: 1 s.** Keskmine on 2 s väiksem kui 10 s puhul. 3600 polli tunnis on
+  meie serverile väike koormus (üks lühike HTTPS-päring sekundis), kasutaja
+  ootab vähem.
+- **Postkontori hind** Labor 1-ga võrreldes: täht otse Atomi nupult jõudis
+  robotikäsuni ~0,5 s-ga, postkontori kaudu kulub esimese liigutuseni
+  keskmiselt ~4,6 s.
 
 **Ühendus katkes keset tööd.** 15.11.26, 3 korda (tähed C, D, E): telefoni
 hotspot (Atomi Wi-Fi) lülitati välja, kui robot joonistas. Robot joonistas
@@ -157,18 +176,23 @@ olek `stale` ~10 s ja `offline` ~30 s pärast seda (`ATOM_STALE_SECONDS=10`,
 
 ### 3. Kaamerad ja Atomi leht
 
-**Üks pilt kummastki kaamerast samal hetkel:** TODO.
+**Üks pilt kummastki kaamerast samal hetkel** (15.11.26 14:06):
+[laud](docs/evidence/camera-table-2026-11-15.jpg) ·
+[tööriist](docs/evidence/camera-tool-2026-11-15.jpg).
 
 | Kaamera | Lahutus | Viide | FPS | Ribalaius | Fail |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Laud, Verbatim AWC-03, 1280 × 720 (jaama lehel) | 1280 × 720 | keskm. 306 ms, max 371 ms | 9,95 | 8,75 Mbit/s | [camera_metrics.csv](docs/camera_metrics.csv) |
 | Laud, 3840 × 2160 → 1280 × 720 | 3840 × 2160 | keskm. 437 ms, max 494 ms | 9,94 | 8,38 Mbit/s | sama |
 | Laud, 1920 × 1080 → 1280 × 720 | 1920 × 1080 | keskm. 501 ms, max 590 ms | 5,00 | 4,36 Mbit/s | sama |
-| Tööriist, XIAO ESP32S3 Sense (OV3660) | 800 × 600 (SVGA JPEG) | TODO | 12,8 (USB, 14.11.26) | TODO | — |
+| Tööriist, XIAO ESP32S3 Sense (OV3660), USB | 800 × 600 (SVGA JPEG) | mediaan 378 ms (254–460 ms; üksikud kuni 1,7 s) | 7,9 | 0,80 Mbit/s | [camera_metrics.csv](docs/camera_metrics.csv) |
 
-Lauakaamera mõõdeti 14.11.26, 12 katset iga lahutuse kohta (monitori
+Lauakaamera viide mõõdeti 14.11.26, 12 katset iga lahutuse kohta (monitori
 muutus → pilt jaama kliendis). Jaama lehel on 1280 × 720: sama FPS ja
-väikseim viide.
+väikseim viide. Tööriistakaamera viide 15.11.26: sündmuseks MG400 käik Z 10 mm
+(30 %), aeg esimesest liigutusest esimese muutunud kaadrini jaama kliendis;
+pikemad väärtused on kaadrid, mis USB kaudu korrati. FPS ja ribalaius on
+mõõdetud 30 s jooksul, kui jaama leht näitas mõlemat voogu.
 
 **Juhtimise latentsus** (jaam saadab MG400-le `MovL` Z ±3 mm → esimene
 liigutus tagasisidepordis 30004; [control_latency_cameras.csv](docs/control_latency_cameras.csv)):
@@ -177,7 +201,7 @@ liigutus tagasisidepordis 30004; [control_latency_cameras.csv](docs/control_late
 | :--- | :--- | :--- | :--- |
 | 0 | 260 ms | 267 ms | 10 |
 | 1 (Verbatim 1280 × 720, 10 FPS) | 263 ms | 271 ms | 10 |
-| 2 | TODO | TODO | — |
+| 2 (Verbatim + XIAO, mõlemad voogesitusel) | 247 ms | 257 ms | 10 |
 
 **Kuidas tööriista kaamera pilt jaamani jõuab.** Jaamaarvutil ei ole Wi-Fi-d,
 seega tuleb XIAO pilt USB serial'i kaudu: `python -m src.camera_server
@@ -190,7 +214,9 @@ Tööriistakaamera näeb pliiatsi otsa ja joonistatud tähti.
 **Atomi leht:** seadete ja testide nimekiri on failis
 [`docs/atom_page.md`](docs/atom_page.md) (serveri aadress, Atomi võti,
 küsimisvahe, postkontori test). Rõhuanduri seaded ja testnupp (ADC, pinge,
-kPa): TODO, Andmehõive Lab 2 kalibratsioon on vaja.
+kPa) on samal lehel; vaikekonstandid tulevad Andmehõive Lab 2 mõõtmistest
+(`docs/atom_page.md`). Kaamerad juhtimist ei aeglustanud (247 / 257 ms kahe
+kaameraga), seega jäid alles mõlemad voogud täies seadistuses.
 
 ## Kontrollnimekiri
 
@@ -209,7 +235,7 @@ kPa): TODO, Andmehõive Lab 2 kalibratsioon on vaja.
 - [x] Lubatud tööde nimekiri kirjas; muu sõnum ei liiguta midagi (15.11.26).
   [Postkontor](#2-postkontor).
 - [x] Sõnum aegub, vana sõnum ei liiguta robotit; läbi proovitud (15.11.26).
-- [ ] Latentsus: 30 sõnumit kahe küsimisvahega. Mõõtmine käib.
+- [x] Latentsus: 30 + 30 sõnumit, küsimisvahe 1 s ja 10 s (15.11.26). [Postkontor](#2-postkontor).
 - [x] Ühendus katkestatud keset tööd: robot lõpetas, vastus jõudis kohale
   (15.11.26, 3 korda). [Video](docs/evidence/connection-loss-letter-c-2026-11-15.mp4).
 - [x] Atom vait: leht näitab viimast postil käiku; proovitud vooluta Atomiga (15.11.26).
@@ -219,9 +245,10 @@ kPa): TODO, Andmehõive Lab 2 kalibratsioon on vaja.
 - [x] Lauakaamera näitab kogu lauda ja robotit (15.11.26).
 - [x] Tööriistakaamera näitab otsikut ja detaili selle all (15.11.26).
 - [x] Mõlemad pildid on jaama lehel, labori võrgus (15.11.26).
-- [ ] Mõlema kaamera viide, FPS ja ribalaius; juhtimislatentsus mõlema
-  kaameraga. Verbatim ning 0 ja 1 kaameraga tehtud 14.11.26; XIAO ja 2 kaamerat TODO.
-- [ ] Rõhuanduri seaded ja testnupp Atomi lehel, `docs/atom_page.md` uuendatud.
+- [x] Mõlema kaamera viide, FPS ja ribalaius; juhtimislatentsus 0, 1 ja 2
+  kaameraga (14.11.26 ja 15.11.26). [Kaamerad](#3-kaamerad-ja-atomi-leht).
+- [x] Rõhuanduri seaded ja testnupp Atomi lehel, [`docs/atom_page.md`](docs/atom_page.md)
+  uuendatud (15.11.26; serveri test päris Atomil HTTP 200).
 - [x] Tellimus 16.10: selle labori jaoks ei tellitud midagi ([`docs/bom.md`](docs/bom.md)).
 - [ ] Repo ja arenduspäevik täidetud, tag `smart-solutions-lab2`.
 
@@ -823,29 +850,36 @@ ei muudeta.
   lõppeks keeldumisega (`station_no_ack` / `station_result_timeout`), mitte
   ootamisega. Jaama tähekataloog võtab vastu kõik A–Z, mida Labor 1 joonistab.
   BOM: selle labori jaoks ei tellitud midagi.
-* Lahti järgmiseks korraks: latentsus 2 × 30 sõnumit, mõlema kaamera
-  mõõdikud koos XIAO-ga ja juhtimislatentsus kahe kaameraga, rõhuanduri
-  seaded ja test Atomi lehel, telefoni ekraanipilt WiFi väljas, teiste
-  liikmete ohutuskinnitused, tag `smart-solutions-lab2`.
+  Hiljem samal päeval: latentsus 30 + 30 sõnumit (1 s ja 10 s), mõlema
+  kaamera mõõdikud ja juhtimislatentsus kahe kaameraga, rõhuanduri seaded ja
+  test Atomi lehel, dropleti uuesti ehitamine märkmete järgi.
+* Lahti järgmiseks korraks: teiste liikmete ohutuskinnitused; rõhu näit
+  anduriga ühendatud Lab 2 Atomil.
 
 ## Väljundid ja tulemused
 
 **Väljundid**
 * Andmehõive L2: Atomi leht, kus on serveri, võtme ja küsimisvahe seaded ning
-  postkontori test; rõhuanduri seaded ja test on TODO.
+  postkontori test; rõhuanduri seaded (Andmehõive Lab 2 konstandid) ja test.
 * 3D printimine L2: lauakaamera pilt kogu lauast ja robotist ning
   tööriistakaamera pilt pliiatsi otsast (15.11.26).
 * Nutikad Lahendused L3: töötav avalik postkontor dropletis (HTTPS, SSH
   võtmetega, UFW) ja kaks kohalikku kaamerapilti jaama lehel.
 
 **KAARDISTA ISE, lõpus.**
-* Git repo ja tag: TODO — lisada esitamisel.
+* Git repo ja tag: [Dennel04/smart-solutions-course](https://github.com/Dennel04/smart-solutions-course), tag `smart-solutions-lab2`.
 * Numbrid, mille see labor andis, ühikutega: Atomi `stale`/`offline` 10 s /
   30 s; Atom ↔ jaam kviitung iga 1,5 s kuni 8 korda, tulemuse tähtaeg 300 s;
   lauakaamera 1280 × 720 viide keskm. 306 ms, 9,95 FPS, 8,75 Mbit/s;
-  juhtimislatentsus 0 / 1 kaameraga 260 / 263 ms; pollingu latentsus TODO.
+  juhtimislatentsus 0 / 1 / 2 kaameraga 260 / 263 / 247 ms; tööriistakaamera
+  viide mediaan 378 ms, 7,9 FPS, 0,80 Mbit/s; postkontori latentsus 1 s
+  küsimisvahega keskm. 4,6 s / max 23,0 s, 10 s vahega 6,7 s / 22,8 s;
+  dropleti uuesti ehitamine märkmete järgi 1 min 33 s.
 * Meeskonna ohutuskinnitused: Denys 15.11.26 ([safety.md](docs/safety.md));
   teised liikmed kinnitavad ise.
-* Mida me teeksime teisiti: TODO — täita lõpus.
+* Mida me teeksime teisiti: robotil peab algusest peale olema üks ühenduse
+  omanik (mg400-base); teised programmid, ka pumba juhtimine, käivad selle
+  HTTP API kaudu. Kaks otseühendust porti 29999 katkestasid teineteist.
 * Mida järgmine labor peaks enne alustamist teadma: jaamaarvutil ei ole
-  Wi-Fi-d, seega XIAO pilt tuleb USB kaudu; TODO — täita lõpus.
+  Wi-Fi-d, seega XIAO pilt tuleb USB kaudu; Atomi Wi-Fi on telefoni
+  hotspot, mis peab olema 2,4 GHz ja ilma automaatse väljalülituseta.
