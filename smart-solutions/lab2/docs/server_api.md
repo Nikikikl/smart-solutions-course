@@ -342,6 +342,11 @@ Serveri tulemuse API ja autentimine ei muutu.
    kutsu executor'it uuesti. Päris MG400 executor integration on TODO.
 4. `claimed` tähendab ainult seda, et server andis töö Atomile. Server ei
    näita `executing` olekut, sest praegune API ei saa seda usaldusväärselt teada.
+   Kui polli vastus Atomini ei jõudnud, jääb töö `claimed` olekusse ilma
+   tulemuseta. Selline töö antakse järgmisel pollil uuesti välja, kui
+   `claimed_at` on vanem kui `CLAIM_LEASE_SECONDS` (vaikimisi 3 s) ja TTL ei
+   ole läbi. Tööd hoidev Atom ei polli, seega saab töö uuesti ainult Atom,
+   kelle käes seda ei ole; Atom ja station tuvastavad korduse `job_id` järgi.
 5. Atom salvestab terminaltulemuse enne aktiivse claim'i kustutamist ja saadab
    sama terminaltulemuse sama ID-ga uuesti kuni `POST /api/atom/result` saab
    eduka vastuse. Serveri tulemusuuendus on idempotentne.
@@ -366,7 +371,7 @@ on üks reavahetusega lõpetatud JSON objekt. `letter` säilitab Lab 1 formaadi:
 
 | Väli | Reegel |
 | :--- | :--- |
-| `letter` | täpselt üks suurtäht `A`–`Z`; mock executor kontrollib lisaks, et Lab 1 `letters.json` sisaldab trajektoori |
+| `letter` | täpselt üks suurtäht `A`–`Z`, mida Lab 1 oskab joonistada (`letters.json` või Lab 1 vaikefont `futural`) |
 | `job` | `letter` puhul valikuline/legacy-puuduv; teise töö puhul täpselt `pick_place` |
 | `routine` | ainult `pick_place` jaoks täpselt `source_to_finished` |
 | `session` | mittetühi kuni 64 märgi pikkune Lab 1-ga ühilduv session |
@@ -377,7 +382,21 @@ on üks reavahetusega lõpetatud JSON objekt. `letter` säilitab Lab 1 formaadi:
 Lisaväljad lükatakse tagasi. Seega ei võta adapter vastu koordinaate, kiirust,
 pumba väärtust, trajektoori ega muud direct-motion käsku.
 
-Station → Atom vastus kasutab täpselt firmware poolt loetavat envelope'i:
+Kui töö rida on korrektne, vastab station kohe enne täitmist kättesaamise
+kinnitusega:
+
+```json
+{"station_ack":{"id":"example-job-id"}}
+```
+
+Atom saadab töö rea ühe kirjutusega ja kordab seda iga 1,5 s järel, kuni
+kinnitus tuleb (kuni 8 korda). Kordamine on ohutu, sest station tuvastab
+dubleeritud `job_id` ja ei täida tööd teist korda. Kui kinnitust ei tule,
+saadab Atom serverile `refused / station_no_ack`; kui kinnitus tuli, aga
+tulemust 300 s jooksul ei tule, `refused / station_result_timeout`. Atom ei jää
+ühelgi juhul lõputult ootama.
+
+Station → Atom tulemus kasutab täpselt firmware poolt loetavat envelope'i:
 
 ```json
 {"post_office_result":{"id":"example-job-id","status":"done"}}
@@ -407,7 +426,7 @@ klienti, ei loo robotivõrgu ühendust ega juhi pumpa/DO-d. Pick-place mock mär
 selgelt `hardware_used=false`. Adapteri default on lokaalselt keelatud;
 `--allow-mock-jobs` lubab ainult kontrollitud mock-täitmise. Tulevane päris executor peab eraldi tõendama
 lokaalse enable'i, roboti teadaoleva safe/ready oleku ja ainsa motion-saatja
-omandi. Päris USB, AtomS3 ja MG400 otsast lõpuni kontroll on TODO.
+omandi. Päris `letter` töö on 15.11.26 läbinud kogu ahela avalikust postkontorist Atomi, USB, Lab 1 ja MG400 kaudu.
 
 ## Vigased ja keeldutud tööd
 

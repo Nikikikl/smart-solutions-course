@@ -258,6 +258,27 @@ def test_claimed_and_completed_job_is_not_delivered_twice(
     assert claim(client, atom_headers, valid_poll).get_json()["job"] is None
 
 
+def test_claim_whose_poll_response_was_lost_is_delivered_again(
+    create_letter, client, clock, atom_headers, valid_poll
+):
+    created = create_letter("R").get_json()
+    assert claim(client, atom_headers, valid_poll).get_json()["job"]["id"] == created["id"]
+    clock.advance(1)
+    assert claim(client, atom_headers, valid_poll).get_json()["job"] is None   # lease still running
+    clock.advance(3)
+    again = claim(client, atom_headers, valid_poll).get_json()["job"]
+    assert again["id"] == created["id"] and again["status"] == "claimed"
+
+
+def test_lost_claim_is_not_delivered_after_its_ttl(
+    create_letter, client, clock, atom_headers, valid_poll
+):
+    created = create_letter("T").get_json()
+    claim(client, atom_headers, valid_poll)
+    clock.advance(61)
+    assert claim(client, atom_headers, valid_poll).get_json()["job"] is None
+
+
 def test_duplicate_result_reporting_is_idempotent(
     create_letter, client, atom_headers, valid_poll
 ):

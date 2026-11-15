@@ -140,13 +140,40 @@ class JobStore:
             ).fetchall()
         return [self._job_from_row(row) for row in rows]
 
-    def claim_next(self):
+    def claim_next(self, lease_seconds=None):
+        """Deliver the next job to the polling Atom.
+
+        A claim is a lease: if the poll response never reached the Atom (it
+        reported poll_failed), the job stays claimed without a result. An idle
+        Atom never polls while it holds a job, so a claimed job older than the
+        lease is handed out again, but only before its TTL. Re-delivery is safe:
+        the Atom and the station both deduplicate by job id.
+        """
         now = self.clock()
         now_text = iso_utc(now)
         connection = self._connect()
         try:
             connection.execute("BEGIN IMMEDIATE")
             self._expire_queued(connection, now)
+            if lease_seconds is not None:
+                lapsed = connection.execute(
+                    """
+                    SELECT * FROM jobs
+                     WHERE status = 'claimed' AND result_json IS NULL
+                       AND claimed_at <= ? AND expires_at > ?
+                     ORDER BY created_at, id
+                     LIMIT 1
+                    """,
+                    (iso_utc(now - timedelta(seconds=lease_seconds)), now_text),
+                ).fetchone()
+                if lapsed is not None:
+                    connection.execute(
+                        "UPDATE jobs SET claimed_at = ?, updated_at = ? WHERE id = ?",
+                        (now_text, now_text, lapsed["id"]),
+                    )
+                    again = connection.execute("SELECT * FROM jobs WHERE id = ?", (lapsed["id"],)).fetchone()
+                    connection.commit()
+                    return self._job_from_row(again)
             row = connection.execute(
                 """
                 SELECT * FROM jobs

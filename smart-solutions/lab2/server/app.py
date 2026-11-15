@@ -44,6 +44,7 @@ def create_app(test_config=None, clock=None):
         MAX_TTL_SECONDS=_environment_int("JOB_MAX_TTL_SECONDS", 3600),
         ATOM_STALE_SECONDS=_environment_int("ATOM_STALE_SECONDS", 10),
         ATOM_OFFLINE_SECONDS=_environment_int("ATOM_OFFLINE_SECONDS", 30),
+        CLAIM_LEASE_SECONDS=_environment_int("CLAIM_LEASE_SECONDS", 3),
     )
     if test_config:
         app.config.update(test_config)
@@ -168,7 +169,7 @@ def create_app(test_config=None, clock=None):
     def atom_poll():
         poll = validate_poll(parse_json_body())
         store().update_heartbeat(poll)
-        job = store().claim_next()
+        job = store().claim_next(lease_seconds=app.config["CLAIM_LEASE_SECONDS"])
         return jsonify(job=job, server_time=iso_utc(now()))
 
     @app.get("/api/atom/jobs/<job_id>")

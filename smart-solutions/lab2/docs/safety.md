@@ -97,9 +97,9 @@
 
 ### Üks kord, enne esimest kaugtööd
 
-- [ ] Kolm päriskatset kinnitavad, et internetikatkestus ei katkesta juba
+- [x] Kolm päriskatset kinnitavad, et internetikatkestus ei katkesta juba
   vastu võetud lokaalset tööd ja puhverdatud tulemus saadetakse hiljem
-  (reeglid 12–13).
+  (reeglid 12–13). 15.11.26: tähed C, D ja E.
 - [ ] Kõik meeskonnaliikmed on kokkuleppe läbi lugenud ja kinnitanud (vt
   allpool).
 
@@ -124,6 +124,6 @@ Iga liige lisab oma kinnituse ise pärast kokkuleppe päriselt läbilugemist.
 | Nimi | Kuupäev | Kinnitus |
 | :--- | :--- | :--- |
 | Nikita | TODO | TODO — kinnitab isiklikult pärast läbilugemist |
-| Denys | TODO | TODO — kinnitab isiklikult pärast läbilugemist |
+| Denys | 15.11.26 | Läbi loetud ja kinnitatud |
 | Raimo | TODO | TODO — kinnitab isiklikult pärast läbilugemist |
 | Maksim | TODO | TODO — kinnitab isiklikult pärast läbilugemist |
