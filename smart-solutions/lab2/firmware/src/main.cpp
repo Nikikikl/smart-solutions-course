@@ -28,6 +28,7 @@ constexpr uint16_t kDnsPort = 53;
 constexpr char kSetupSsid[] = "Lab2AtomSetup";
 constexpr int kPressureAdcPin = 5;  // AtomS3(R) G5; verify DA2 wiring in lab.
 constexpr int kPressureSampleCount = 8;
+constexpr size_t kServerResponseExcerptLength = 200;
 
 WebServer webServer(80);
 DNSServer dnsServer;
@@ -220,10 +221,29 @@ void handleSettingsPost() {
 
 void handlePostOfficeTest() {
   // Deliberately calls only /health; it cannot claim or execute a job.
-  const String result = postOfficeClient.testConnection();
+  int httpStatus = -1;
+  String serverResponse;
+  const String result = postOfficeClient.testConnection(&httpStatus, &serverResponse);
   const bool ok = result == "health_ok";
-  webServer.send(ok ? 200 : 503, "application/json",
-                 "{\"result\":" + jsonString(result) + "}");
+  JsonDocument document;
+  document["result"] = result;
+  if (httpStatus > 0) {
+    document["http_status"] = httpStatus;
+  } else {
+    document["http_status"] = nullptr;
+  }
+  // Show what the server answered: printable characters only, bounded length.
+  String excerpt;
+  for (size_t index = 0; index < serverResponse.length() &&
+                         excerpt.length() < kServerResponseExcerptLength;
+       ++index) {
+    const char character = serverResponse[index];
+    excerpt += (character >= 0x20 && character < 0x7f) ? character : ' ';
+  }
+  document["server_response"] = excerpt;
+  String response;
+  serializeJson(document, response);
+  webServer.send(ok ? 200 : 503, "application/json", response);
 }
 
 void handlePressureSettingsGet() {
@@ -243,6 +263,15 @@ void handlePressureSettingsGet() {
     document["kpa_per_volt"] = nullptr;
     document["pressure_offset_kpa"] = nullptr;
   }
+  document["source"] = pressureSettingsStore.hasStoredCalibration()
+                           ? "saved"
+                           : "data_acquisition_lab2_default";
+  const pressure::Calibration defaults = pressure::dataAcquisitionLab2Calibration();
+  JsonObject defaultValues = document["defaults"].to<JsonObject>();
+  defaultValues["volts_per_count"] = defaults.voltsPerCount;
+  defaultValues["voltage_offset_v"] = defaults.voltageOffsetV;
+  defaultValues["kpa_per_volt"] = defaults.kpaPerVolt;
+  defaultValues["pressure_offset_kpa"] = defaults.pressureOffsetKpa;
   String response;
   serializeJson(document, response);
   webServer.send(200, "application/json", response);

@@ -6,7 +6,12 @@ bool SettingsStore::begin() {
   return preferences_.begin("pressure", false);
 }
 
+bool SettingsStore::hasStoredCalibration() const {
+  return preferences_.isKey("calibrated");
+}
+
 Calibration SettingsStore::load() const {
+  if (!hasStoredCalibration()) return dataAcquisitionLab2Calibration();
   Calibration calibration;
   calibration.calibrated = preferences_.getBool("calibrated", false);
   if (!calibration.calibrated) return calibration;

@@ -259,6 +259,18 @@ void test_pressure_valid_calibration_converts_raw_voltage_and_kpa() {
   TEST_ASSERT_FLOAT_WITHIN(0.001f, 90.0f, reading.pressureKpa);
 }
 
+void test_pressure_data_acquisition_defaults_are_valid() {
+  const pressure::Calibration defaults =
+      pressure::dataAcquisitionLab2Calibration();
+  TEST_ASSERT_TRUE(defaults.calibrated);
+  TEST_ASSERT_TRUE(pressure::validateCalibration(defaults).ok());
+  // 957 counts = 0.865 V, the G5 multimeter reading at atmosphere (15.11).
+  const pressure::Reading reading = pressure::convertReading(957, defaults);
+  TEST_ASSERT_TRUE(reading.ok());
+  TEST_ASSERT_FLOAT_WITHIN(0.001f, 0.8647f, reading.voltageV);
+  TEST_ASSERT_FLOAT_WITHIN(0.1f, 99.14f, reading.pressureKpa);
+}
+
 void test_pressure_invalid_coefficients_fail_closed() {
   pressure::Calibration calibration = validPressureCalibration();
   calibration.voltsPerCount = 0.0f;
@@ -352,6 +364,7 @@ int main(int argc, char** argv) {
   RUN_TEST(test_failed_wifi_retry_returns_to_fallback_wait);
   RUN_TEST(test_pressure_uncalibrated_state_never_invents_converted_values);
   RUN_TEST(test_pressure_valid_calibration_converts_raw_voltage_and_kpa);
+  RUN_TEST(test_pressure_data_acquisition_defaults_are_valid);
   RUN_TEST(test_pressure_invalid_coefficients_fail_closed);
   RUN_TEST(test_pressure_parser_accepts_complete_bounded_calibration);
   RUN_TEST(test_pressure_parser_rejects_malformed_input_without_changing_previous);

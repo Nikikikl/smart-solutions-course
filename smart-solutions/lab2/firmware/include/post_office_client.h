@@ -16,8 +16,9 @@ class PostOfficeClient {
   void configure(const Settings& settings);
   void tick(uint32_t nowMs);
 
-  // GET /health only. It never polls or claims a job.
-  String testConnection();
+  // GET /health only. It never polls or claims a job. Optional outputs return
+  // the HTTP status (-1 without a response) and the server's response body.
+  String testConnection(int* httpStatus = nullptr, String* responseBody = nullptr);
   String statusText() const { return statusText_; }
 
  private:

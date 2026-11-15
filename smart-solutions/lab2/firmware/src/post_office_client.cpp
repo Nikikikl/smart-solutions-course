@@ -417,9 +417,11 @@ void PostOfficeClient::tick(uint32_t nowMs) {
   pollOnce(nowMs);
 }
 
-String PostOfficeClient::testConnection() {
+String PostOfficeClient::testConnection(int* httpStatus, String* responseBody) {
   String response;
   const int code = get("/health", response);
+  if (httpStatus != nullptr) *httpStatus = code;
+  if (responseBody != nullptr) *responseBody = response;
   if (code == 200) return "health_ok";
   return code > 0 ? "health_http_" + String(code) : statusText_;
 }

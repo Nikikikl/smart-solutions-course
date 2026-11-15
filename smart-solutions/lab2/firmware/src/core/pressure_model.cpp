@@ -16,6 +16,14 @@ constexpr float kMinConvertedVoltageV = -0.5f;
 constexpr float kMaxConvertedVoltageV = 5.5f;
 constexpr float kMaxAbsConvertedPressureKpa = 10000.0f;
 
+// Data Acquisition Lab 2 values (see docs/atom_page.md for the sources).
+constexpr float kDaAdcFullScaleV = 3.70f;
+constexpr float kDaStageGain = 1.0f + 10.0f / 54.0f;
+constexpr float kDaStageVrefV = 0.69f;
+constexpr float kDaSensorSupplyV = 5.0f;
+constexpr float kDaSensorSlopePerKpa = 0.0012858f;
+constexpr float kDaSensorOffsetRatio = 0.04f;
+
 bool finiteInRange(float value, float minimum, float maximum) {
   return std::isfinite(value) && value >= minimum && value <= maximum;
 }
@@ -95,6 +103,22 @@ CalibrationResult validateCalibration(const Calibration& calibration) {
             "pressure_range_invalid"};
   }
   return {CalibrationCode::Ok, "ok"};
+}
+
+Calibration dataAcquisitionLab2Calibration() {
+  const float sensorVoltsPerKpa = kDaSensorSupplyV * kDaSensorSlopePerKpa;
+  const float sensorZeroV = kDaSensorSupplyV * kDaSensorOffsetRatio;
+  Calibration calibration;
+  calibration.calibrated = true;
+  calibration.voltsPerCount = kDaAdcFullScaleV / kAdcMaxCount;
+  calibration.voltageOffsetV = 0.0f;
+  // Invert the stage and the sensor: P = (Vout / A + (A - 1) * Vref / A
+  // - sensorZeroV) / sensorVoltsPerKpa.
+  calibration.kpaPerVolt = 1.0f / (kDaStageGain * sensorVoltsPerKpa);
+  calibration.pressureOffsetKpa =
+      ((kDaStageGain - 1.0f) * kDaStageVrefV / kDaStageGain - sensorZeroV) /
+      sensorVoltsPerKpa;
+  return calibration;
 }
 
 CalibrationResult parseCalibration(const char* voltsPerCount,

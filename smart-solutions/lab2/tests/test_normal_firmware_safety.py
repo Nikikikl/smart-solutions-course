@@ -214,3 +214,17 @@ def test_sensor_confirmation_is_ram_only_and_on_existing_page():
     assert "f.set('sensor_confirmed',sensorConfirmed.checked?'1':'0')" in page
     store = (FW / "src/pressure_settings.cpp").read_text()
     assert "sensor_confirmed" not in store and "pressureSensorConfirmed" not in store
+
+
+def test_atom_page_server_test_shows_server_answer_and_pressure_defaults():
+    source = (FW / "src/main.cpp").read_text()
+    page = (FW / "include/web_page.h").read_text()
+    store = (FW / "src/pressure_settings.cpp").read_text()
+    assert "postOfficeClient.testConnection(&httpStatus, &serverResponse)" in source
+    assert 'document["server_response"] = excerpt;' in source
+    assert "p.server_response" in page
+    assert "if (!hasStoredCalibration()) return dataAcquisitionLab2Calibration();" in store
+    assert 'document["defaults"]' in source
+    assert "fillPressureDefaults()" in page
+    # Still one page: no new HTML route was added.
+    assert source.count("LAB2_INDEX_HTML") == 1

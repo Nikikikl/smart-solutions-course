@@ -34,6 +34,13 @@ struct CalibrationResult {
 
 CalibrationResult validateCalibration(const Calibration& calibration);
 
+// Default conversion from the documented Data Acquisition Lab 2 chain:
+// G5 ADC 3.70 V / 4095, LM358N stage Vout = A * Vin - (A - 1) * Vref with
+// A = 1 + 10k / 54k and Vref = 0.69 V, and the MPX5700AP datasheet transfer
+// Vin = 5.0 V * (0.0012858 * P + 0.04). Pressure is absolute kPa. These are
+// editable defaults, not a reference-pressure calibration.
+Calibration dataAcquisitionLab2Calibration();
+
 // Parses all four fields as one unit and changes output only after complete
 // validation. Values from Data Acquisition Lab 2 can therefore replace the
 // uncalibrated defaults without changing firmware code.
