@@ -88,7 +88,18 @@ XIAO tööriistakaamera → USB serial → jaama kaameraleht
 | Kelle võtmed on sees ja millal | Nikita 16.10.26; Raimo 13.11.26 (konto `raimo`, ilma sudo-ta); Denys jaamaarvutist 14.11.26 (konto `denys`); 15.11.26 on iga liikme võti tema oma arvutist dropletis. Privaatvõtmed jäävad arvutitesse. |
 | Lahti olevad pordid | UFW `active`, default `deny incoming`: TCP 22 — SSH; TCP 80 ja 443 — Caddy (HTTPS). Gunicorn ainult `127.0.0.1:5001` (20.10.26). |
 | Kuidas sisse saab | `ssh <kasutaja>@narva2.roboarena.org` oma võtmega; `passwordauthentication no`, `kbdinteractiveauthentication no` (20.10.26). |
-| Uuesti ehitamine | Ei ole veel tehtud. Juhend: [taastamine puhtale dropletile](deploy/README.md#taastamine-puhtale-dropletile). |
+| Uuesti ehitamine | 15.11.26 ehitati postkontor uuesti ainult [paigaldusjuhendi](deploy/README.md) järgi samasse dropletisse eraldi kausta ja porti (`127.0.0.1:5099`), production'it puutumata. Kood, virtualenv, env, andmebaas ja käivitus kuni töötava kontrollini: **1 min 33 s** skriptiga; inimesel käsitsi hinnanguliselt 30–45 min. Kontroll läbis: `/health` 200, ilma paroolita 401, töö loomine → Atomi poll → tulemus `done`. Pärast kontrolli kustutati koopia. Mis märkmetest puudu oli, vt allpool. |
+
+**Mis märkmetest puudu oli (15.11.26 uuesti ehitamisel)** ja mis lisati
+[paigaldusjuhendisse](deploy/README.md#uuesti-ehitamise-märkused-15112026):
+
+1. Skriptid on seotud production'i radade ja pordiga (`/opt/smart-solutions-lab2`, 5001), teist koopiat nendega ei ehita.
+2. Puudus käsitsi käivituse käsk ilma systemd-ta (env laadimine, `umask 077`, logid).
+3. Puudus otsast lõpuni kontroll näidispäringutega (töö → poll → tulemus).
+4. Polnud kirjas, milline commit peab serveris olema.
+5. Pakettide nimekiri ei vastanud serverile (`python3.12-venv`; `sqlite3` käsku ei ole vaja).
+6. Env-failist puudusid valikulised `CLAIM_LEASE_SECONDS` (3) ja `POST_OFFICE_BIND` (`127.0.0.1`).
+7. Polnud kirjas, et `sudo` küsib dropletis parooli.
 
 Paigaldus ja uuendus: `deploy/install.sh`, `deploy/update.sh`, kontroll
 `deploy/verify.sh` (20.10.26: 12 PASS, 0 FAIL; 15.11.26 pärast uuendust
@@ -119,8 +130,9 @@ anta. 15.11.26: `letter B` TTL-iga 15 s jäeti, kui Atom oli vooluta; töö
 aegus ja Atomi sisselülitamisel robot ei liikunud. (Ka 20.10.26: `letter A`
 aegus päris serveris.)
 
-**Telefon WiFi väljas.** Ekraanipilt: TODO. 20.10.26 avati leht ja logiti
-sisse Chrome'iga telefonis 5G kaudu.
+**Telefon WiFi väljas.** 20.10.26 avati leht ja logiti sisse Chrome'iga
+telefonis 5G kaudu. 15.11.26 pandi tähed C, D ja E järjekorda telefonist
+mobiilse andmesidega ([video](docs/evidence/connection-loss-letter-c-2026-11-15.mp4)).
 
 **Latentsus** (kasutaja vajutus → roboti esimene liigutus, 30 sõnumit):
 
@@ -189,8 +201,8 @@ kPa): TODO, Andmehõive Lab 2 kalibratsioon on vaja.
 - [x] Droplet töötab, igast arvutist saab oma võtmega sisse, paroolisisselogimine
   keelatud, tulemüür lahti ainult kasutatud portidel (20.10.26, 15.11.26).
 - [x] Leht käib õppejõu lingi peal HTTPS-iga (20.10.26).
-- [x] Kasutaja leht avaneb telefonist mobiilse andmesidega (20.10.26, 5G).
-  Ekraanipilt WiFi väljas: TODO.
+- [x] Kasutaja leht avaneb telefonist mobiilse andmesidega (20.10.26, 5G;
+  15.11.26 tööd C, D, E telefonist).
 - [x] Atom käib postil oma võtmega: saadab oleku ja küsib sõnumeid (14.11.26).
 - [x] Kasutaja jätab sõnumi, robot teeb töö, leht näitab vastust; kaks eri tööd,
   üks neist Labori 1 täht: `letter A` ja `display_image` (15.11.26).

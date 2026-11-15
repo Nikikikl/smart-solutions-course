@@ -133,7 +133,8 @@ testide, station-adapteri ja kaamerate sõltuvused on eraldi failis
 - puhas toetatud Ubuntu droplet, mille hostinimi/IP on õppejõult saadud;
 - iga meeskonnaliikme eraldi SSH võtmepaar ja kontrollitud võtmega login;
 - DNS A/AAAA kirje `<TEAM_HOSTNAME>` jaoks;
-- `git`, `python3`, `python3-venv`, `curl`, `sqlite3`, Caddy ja `ufw`;
+- `git`, `python3`, `python3.12-venv`, `curl`, Caddy ja `ufw` (`sqlite3` käsk ainult käsitsi kontrolliks);
+- `sudo` küsib dropletis parooli; see on paroolihalduris koos veebiparooli ja Atomi võtmega;
 - Git checkout on `/opt/smart-solutions-lab2/app`;
 - päris väärtused on paroolihalduris, mitte repos ega shelli ajaloos.
 
@@ -433,6 +434,36 @@ korral on vaja selle versiooni eraldi migratsioonijuhist.
 10. Sea tulemüür alles pärast SSH ligipääsu kontrolli ning käivita teenused.
 11. Käivita `deploy/verify.sh`, kontrolli autentimist ja tee Atomiga päris
     outgoing-polling katse. Dokumenteeri kuupäev ning tegelik tulemus alles siis.
+
+## Uuesti ehitamise märkused 15.11.2026
+
+Serveris töötav commit: vaata `git -C /opt/smart-solutions-lab2/app log --oneline -1`
+ja klooni sama ref (`git checkout <commit>`), mitte lihtsalt viimast `main`-i.
+
+Env-faili valikulised võtmed: `CLAIM_LEASE_SECONDS` (vaikimisi 3) ja
+`POST_OFFICE_BIND` (vaikimisi `127.0.0.1`).
+
+Käsitsi käivitus ilma systemd-ta (nt testkoopia teises pordis):
+
+```bash
+set -a; . /path/to/env; set +a; umask 077
+runuser -u smart-solutions-lab2 -- /path/to/venv/bin/gunicorn --workers 2   --bind 127.0.0.1:5099 --access-logfile - --error-logfile - server.wsgi:app
+```
+
+Otsast lõpuni kontroll (vaheta port, kasutaja, parool ja Atomi võti):
+
+```bash
+B=http://127.0.0.1:5099
+curl -s -o /dev/null -w '%{http_code}
+' $B/            # 401 ilma paroolita
+ID=$(curl -s -u USER:PASS -H 'Content-Type: application/json'   -d '{"job":"letter","arg":{"letter":"A"},"ttl_seconds":120}' $B/api/jobs | python3 -c 'import json,sys;print(json.load(sys.stdin)["id"])')
+curl -s -H "Authorization: Bearer ATOM_KEY" -H 'Content-Type: application/json'   -d '{"device_id":"test","poll_interval_ms":1000}' $B/api/atom/poll   # töö tuleb "claimed"
+curl -s -H "Authorization: Bearer ATOM_KEY" -H 'Content-Type: application/json'   -d "{\"id\":\"$ID\",\"status\":\"done\",\"result\":{}}" $B/api/atom/result
+curl -s -u USER:PASS $B/api/jobs/$ID                    # "status":"done"
+```
+
+`install.sh`, `update.sh` ja `verify.sh` kasutavad production'i radu ja porti
+5001; testkoopia sammud tehakse käsitsi nagu ülal.
 
 ## Kontrollimine ja logid
 
